@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Register UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f2f5;
+        }
+
+        .container {
+            display: flex;
+            width: 900px;
+            height: 500px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* Left Panel */
+        .left-panel {
+            width: 50%;
+            background: url('https://ubmttqvn.binhthuan.dcs.vn/uploads/News/images/Cum%20dao%20Cu%20Lao%20Cham%20Hoi%20An%20Quang%20Nam.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .left-panel::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .left-panel .content {
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .left-panel h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .left-panel p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .left-panel button {
+            background: none;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .left-panel button:hover {
+            background-color: #fff;
+            color: #333;
+        }
+
+        /* Right Panel */
+        .right-panel {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .right-panel h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .right-panel input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .right-panel button {
+            width: 100%;
+            background-color: #00bcd4;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .right-panel button:hover {
+            background-color: #0097a7;
+        }
+
+        .right-panel .options {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #0097a7;
+        }
+
+        .right-panel .options a {
+            text-decoration: none;
+            color: #0097a7;
+        }
+
+        /* Hidden Panels */
+        .hidden {
+            display: none;
+        }
+
+        .panel {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <div class="content">
+                <h2 id="left-title">Start your journey now</h2>
+                <p id="left-text">Don't have an account yet? Join us and start your journey.</p>
+                <!-- Register Button -->
+                <button id="toggle-button" onclick="toggleForm()">Register</button>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <!-- Login Form -->
+            <div id="login-form">
+                <h2>Login</h2>
+                <form>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <div class="options">
+                        <label>
+                            <input type="checkbox"> Remember me
+                        </label>
+                        <a href="#">Forgot password?</a>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="hidden">
+                <h2>Register</h2>
+                <form>
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const leftTitle = document.getElementById("left-title");
+        const leftText = document.getElementById("left-text");
+        const toggleButton = document.getElementById("toggle-button");
+        const loginForm = document.getElementById("login-form");
+        const registerForm = document.getElementById("register-form");
+        const container = document.querySelector(".container");
+        const rightPanel = document.querySelector(".right-panel");
+
+        // Function to toggle between login and register forms
+        function toggleForm() {
+            if (loginForm.classList.contains("hidden")) {
+                // Switch to Login Form
+                loginForm.classList.remove("hidden");
+                registerForm.classList.add("hidden");
+                leftTitle.innerText = "Start your journey now";
+                leftText.innerText = "Don't have an account yet? Join us and start your journey.";
+                toggleButton.innerText = "Register";
+
+                // Reset panels to the center
+                container.style.transform = "translateX(0)";
+                rightPanel.style.transform = "translateX(0)";
+            } else {
+                // Switch to Register Form
+                loginForm.classList.add("hidden");
+                registerForm.classList.remove("hidden");
+                leftTitle.innerText = "Welcome Back!";
+                leftText.innerText = "Already have an account? Log in to continue.";
+                toggleButton.innerText = "Login";
+
+                // Move panels to swap form positions while keeping them centered
+                container.style.transform = "translateX(0)";  // Keep container centered
+                rightPanel.style.transform = "translateX(0)"; // Keep Register form in view
+            }
+        }
+    </script>
+</body>
+</html>
