@@ -86,20 +86,19 @@
     <script>
         function handleLogin(event) {
             event.preventDefault();
-
-            // Lấy email và mật khẩu nhập vào
             const email = document.getElementById("login-email").value;
             const password = document.getElementById("login-password").value;
 
-            // Lấy danh sách người dùng từ localStorage
+            // Debug thông tin localStorage
             const users = JSON.parse(localStorage.getItem("users")) || [];
+            console.log("Users in storage:", users);
 
-            // Kiểm tra xem có tài khoản nào khớp không
             const user = users.find(user => user.email === email && user.password === password);
+            console.log("Login attempt:", { email, password, foundUser: user });
 
             if (user) {
-                alert(`Welcome, ${user.name}!`);
-                window.location.href = "https://pyseetinh.github.io/DataAccount/";
+                alert("Login successful!");
+                window.location.href = "https://pyseetinh.github.io/DataAccount/"; // Điều hướng
             } else {
                 alert("Invalid email or password. Please register if you don't have an account.");
             }
